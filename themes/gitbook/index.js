@@ -65,7 +65,7 @@ function getNavPagesWithLatest(allNavPages, latestPosts, post) {
 
   return allNavPages?.map(item => {
     const res = {
-      short_id: item.short_id,
+      short_id: item.id ? getShortId(item.id) : '',
       title: item.title || '',
       pageCoverThumbnail: item.pageCoverThumbnail || '',
       category: item.category || null,
@@ -79,8 +79,8 @@ function getNavPagesWithLatest(allNavPages, latestPosts, post) {
     // 属于最新文章通常6篇 && (无阅读记录 || 最近更新时间大于上次阅读时间)
     if (
       (latestPosts || []).some(post => post?.id.indexOf(item?.short_id) === 14) &&
-      (!postReadTime[item.short_id] ||
-        postReadTime[item.short_id] < new Date(item.lastEditedDate).getTime())
+      (!postReadTime[(item.id ? getShortId(item.id) : '')] ||
+        postReadTime[(item.id ? getShortId(item.id) : '')] < new Date(item.lastEditedDate).getTime())
     ) {
       return { ...res, isLatest: true }
     } else {
