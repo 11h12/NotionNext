@@ -600,7 +600,12 @@ const ThemeSwitch = () => {
   const changeTheme = newTheme => {
     const query = router.query
     query.theme = newTheme
-    router.push({ pathname: router.pathname, query }).then(() => {})
+    
+    // Use window.location to avoid Next.js router 404 bugs with dynamic catch-all routes
+    const url = new URL(window.location.href)
+    url.searchParams.set('theme', newTheme)
+    window.location.href = url.toString()
+    
   }
 
   return (
