@@ -54,14 +54,14 @@ export const useGitBookGlobal = () => useContext(ThemeGlobalGitbook)
  */
 function getNavPagesWithLatest(allNavPages, latestPosts, post) {
   // localStorage 保存id和上次阅读时间戳： posts_read_time = {"${post.id}":"Date()"}
-  const postReadTime = JSON.parse(
+  const postReadTime = typeof window !== 'undefined' ? JSON.parse(
     localStorage.getItem('post_read_time') || '{}'
-  )
+  ) : {}
   if (post) {
     postReadTime[getShortId(post.id)] = new Date().getTime()
   }
   // 更新
-  localStorage.setItem('post_read_time', JSON.stringify(postReadTime))
+  if (typeof window !== 'undefined') localStorage.setItem('post_read_time', JSON.stringify(postReadTime))
 
   return allNavPages?.map(item => {
     const res = {
@@ -78,7 +78,7 @@ function getNavPagesWithLatest(allNavPages, latestPosts, post) {
     }
     // 属于最新文章通常6篇 && (无阅读记录 || 最近更新时间大于上次阅读时间)
     if (
-      latestPosts.some(post => post?.id.indexOf(item?.short_id) === 14) &&
+      (latestPosts || []).some(post => post?.id.indexOf(item?.short_id) === 14) &&
       (!postReadTime[item.short_id] ||
         postReadTime[item.short_id] < new Date(item.lastEditedDate).getTime())
     ) {
