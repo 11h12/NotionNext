@@ -404,9 +404,9 @@ function inferThemeSettings(themeId, manualSettings = []) {
 
 const SELECT_OPTIONS_BY_KEY = {
   NEXT_NAV_TYPE: [
-    { label: '固定顶部', value: 'fixed' },
-    { label: '滚动收起', value: 'autoCollapse' },
-    { label: '普通导航', value: 'normal' }
+    { label: 'Ghim trên đầu', value: 'fixed' },
+    { label: 'Cuộn để ẩn', value: 'autoCollapse' },
+    { label: 'Điều hướng thường', value: 'normal' }
   ]
 }
 
@@ -489,17 +489,17 @@ const CONFIG_LABEL_WORDS = {
 }
 
 const CONFIG_HELP_RULES = [
-  [/MENU_(CATEGORY|TAG|ARCHIVE|SEARCH|RSS|INDEX|HOME)/, '控制导航菜单中是否显示该入口。'],
-  [/POST_LIST_COVER/, '控制文章列表卡片是否显示封面图。'],
-  [/POST_LIST_(SUMMARY|PREVIEW)/, '控制文章列表是否显示摘要或正文预览。'],
-  [/COVER_DEFAULT|COVER_FORCE/, '控制缺少封面时是否使用默认封面。'],
-  [/WIDGET_/, '控制主题悬浮工具或侧边栏组件是否显示。'],
-  [/HOME_.*ENABLE|HERO_ENABLE|BANNER_ENABLE/, '控制首页对应模块是否显示。'],
-  [/COUNT$/, '控制当前模块展示的条目数量。'],
-  [/NAV_TYPE$/, '控制导航栏的固定和滚动行为。'],
-  [/LAYOUT_VERTICAL$/, '控制文章页使用上下布局还是左右布局。'],
-  [/REDIRECT_ENABLE$/, '控制文章地址是否启用重定向。'],
-  [/CACHE_ENABLED|PERSIST_ENABLED/, '控制浏览器本地缓存或持久化能力。']
+  [/MENU_(CATEGORY|TAG|ARCHIVE|SEARCH|RSS|INDEX|HOME)/, 'Cho phép hiển thị/ẩn trên menu điều hướng.'],
+  [/POST_LIST_COVER/, 'Cho phép hiển thị/ẩn ảnh bìa trên danh sách bài viết.'],
+  [/POST_LIST_(SUMMARY|PREVIEW)/, 'Cho phép hiển thị/ẩn tóm tắt bài viết trên trang chủ.'],
+  [/COVER_DEFAULT|COVER_FORCE/, 'Tự động sử dụng ảnh bìa mặc định nếu bài viết không có ảnh.'],
+  [/WIDGET_/, 'Cho phép hiển thị/ẩn các công cụ nổi (Widget) hoặc cột bên.'],
+  [/HOME_.*ENABLE|HERO_ENABLE|BANNER_ENABLE/, 'Cho phép hiển thị/ẩn tính năng này trên trang chủ.'],
+  [/COUNT$/, 'Giới hạn số lượng hiển thị cho tính năng này.'],
+  [/NAV_TYPE$/, 'Cài đặt chế độ ghim thanh điều hướng.'],
+  [/LAYOUT_VERTICAL$/, 'Cài đặt bố cục trang bài viết (trên-dưới hoặc trái-phải).'],
+  [/REDIRECT_ENABLE$/, 'Bật/tắt tính năng tự động chuyển hướng đường dẫn bài viết.'],
+  [/CACHE_ENABLED|PERSIST_ENABLED/, 'Bật/tắt tính năng lưu trữ bộ nhớ đệm trên trình duyệt.']
 ]
 
 function normalizeSetting(item, themeId) {
@@ -517,8 +517,8 @@ function inferSelectOptions(item) {
   if (SELECT_OPTIONS_BY_KEY[item.key]) return SELECT_OPTIONS_BY_KEY[item.key]
   if (typeof item.defaultValue === 'string' && /^(true|false)$/i.test(item.defaultValue)) {
     return [
-      { label: '开启', value: 'true' },
-      { label: '关闭', value: 'false' }
+      { label: 'Bật', value: 'true' },
+      { label: 'Tắt', value: 'false' }
     ]
   }
   return null
@@ -527,10 +527,10 @@ function inferSelectOptions(item) {
 function formatConfigHelp(key) {
   const rule = CONFIG_HELP_RULES.find(([pattern]) => pattern.test(key))
   if (rule) return rule[1]
-  if (/_ENABLE$/.test(key)) return '控制该模块是否启用。'
-  if (/_TEXT$|_TITLE$|_NAME$/.test(key)) return '控制页面上显示的文字内容。'
-  if (/_URL$/.test(key)) return '控制点击后跳转的链接地址。'
-  return '主题基础配置，修改后可实时预览并复制到 Notion Config。'
+  if (/_ENABLE$/.test(key)) return 'Bật/tắt tính năng này.'
+  if (/_TEXT$|_TITLE$|_NAME$/.test(key)) return 'Thay đổi nội dung văn bản sẽ được hiển thị trên web.'
+  if (/_URL$/.test(key)) return 'Thay đổi đường dẫn đích khi nhấn vào.'
+  return 'Xem trước trực tiếp cấu hình, bạn có thể copy vào Notion Config để lưu vĩnh viễn.'
 }
 
 function formatConfigLabel(key, themeId) {
