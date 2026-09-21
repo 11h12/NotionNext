@@ -121,18 +121,18 @@ const THEME_COLOR_DEFAULTS = {
 }
 
 const BASE_PALETTE = [
-  ['PRIMARY', '主色'],
-  ['BG', '页面背景'],
-  ['CARD', '卡片背景'],
-  ['TEXT', '主文字'],
-  ['TEXT_SECONDARY', '次级文字'],
-  ['BORDER', '边框'],
-  ['PRIMARY_DARK', '深色模式：主色'],
-  ['BG_DARK', '深色模式：页面背景'],
-  ['CARD_DARK', '深色模式：卡片背景'],
-  ['TEXT_DARK', '深色模式：主文字'],
-  ['TEXT_SECONDARY_DARK', '深色模式：次级文字'],
-  ['BORDER_DARK', '深色模式：边框']
+  ['PRIMARY', 'Màu chính'],
+  ['BG', 'Nền trang web'],
+  ['CARD', 'Nền thẻ'],
+  ['TEXT', 'Chữ chính'],
+  ['TEXT_SECONDARY', 'Chữ phụ'],
+  ['BORDER', 'Đường viền'],
+  ['PRIMARY_DARK', 'Chế độ tối: Màu chính'],
+  ['BG_DARK', 'Chế độ tối: Nền trang web'],
+  ['CARD_DARK', 'Chế độ tối: Nền thẻ'],
+  ['TEXT_DARK', 'Chế độ tối: Chữ chính'],
+  ['TEXT_SECONDARY_DARK', 'Chế độ tối: Chữ phụ'],
+  ['BORDER_DARK', 'Chế độ tối: Đường viền']
 ]
 
 export function getThemeColorDefault(themeId, token) {
