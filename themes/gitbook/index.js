@@ -259,7 +259,7 @@ const LayoutIndex = props => {
         const targetUrl = index.startsWith('/') ? index : '/' + index;
         const exists = props.allNavPages && props.allNavPages.some(p => p.slug === index || p.href === targetUrl || p.id === index);
         
-        if (exists || index === 'about') {
+        if (exists) {
             await router.push(targetUrl)
         } else if (props.allNavPages && props.allNavPages.length > 0) {
             // Fallback to the first available page if the configured index doesn't exist
@@ -445,15 +445,10 @@ const Layout404 = props => {
   const router = useRouter()
   const { locale } = useGlobal()
   useEffect(() => {
-    // 延时3秒如果加载失败就返回首页
-    setTimeout(() => {
-      const article = isBrowser && document.getElementById('article-wrapper')
-      if (!article) {
-        if (router.asPath !== '/') {
-          router.push('/').then(() => {})
-        }
-      }
-    }, 3000)
+    // Removed 3-second auto-redirect to prevent infinite redirect loops
+    // Users can click the navigation menu to return home manually.
+    console.log('404 Page Not Found:', router.asPath)
+
   }, [])
 
   return (
