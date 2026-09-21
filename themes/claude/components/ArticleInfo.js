@@ -26,7 +26,7 @@ export default function ArticleInfo(props) {
           <header className='text-md text-[var(--primary-color)] dark:text-gray-300 flex-wrap flex items-center leading-6'>
             <div className='space-x-2'>
               <span className='text-sm'>
-                发布于
+                Đăng vào 
                 <SmartLink
                   className='p-1 hover:text-red-400 transition-all duration-200'
                   href={`/archive#${formatDateFmt(post?.publishDate, 'yyyy-MM')}`}>

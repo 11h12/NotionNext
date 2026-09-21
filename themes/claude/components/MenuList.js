@@ -104,8 +104,8 @@ export const MenuList = ({ customNav, customMenu }) => {
             aria-label={
               router.locale?.startsWith?.('zh')
                 ? isOpen
-                  ? '收起子菜单'
-                  : '展开子菜单'
+                  ? 'Thu gọn'
+                  : 'Mở rộng'
                 : isOpen
                   ? 'Collapse submenu'
                   : 'Expand submenu'

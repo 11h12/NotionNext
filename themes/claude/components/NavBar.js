@@ -229,7 +229,7 @@ export default function NavBar(props) {
                 </div>
                 <div className='claude-terminal-line claude-terminal-shell' ref={terminalShellRef}>
                   <span className='claude-terminal-shell-text' ref={terminalShellTextRef}>
-                    {`${author}@Macintosh ~ % `}
+                    {`${author}@System ~ % `}
                   </span>
                   <span ref={terminalCommandRef}>
                     <SmartLink href='/' className='claude-terminal-command'>
