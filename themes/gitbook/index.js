@@ -255,14 +255,10 @@ const LayoutIndex = props => {
         // 仅当未重定向时执行
         setHasRedirected(true) // 更新状态，防止多次执行
 
-        // Check if the target exists in allNavPages
-        const targetUrl = index.startsWith('/') ? index : '/' + index;
-        const exists = props.allNavPages && props.allNavPages.some(p => p.slug === index || p.href === targetUrl || p.id === index);
-        
-        if (exists) {
-            await router.push(targetUrl)
+        // Automatically redirect to the latest post (as requested by user)
+        if (props.latestPosts && props.latestPosts.length > 0) {
+            await router.push(props.latestPosts[0].href)
         } else if (props.allNavPages && props.allNavPages.length > 0) {
-            // Fallback to the first available page if the configured index doesn't exist
             await router.push(props.allNavPages[0].href)
         } else {
             // Nothing to show
