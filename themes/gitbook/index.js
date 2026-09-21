@@ -456,11 +456,12 @@ const Layout404 = props => {
       <div className='md:-mt-20 text-black w-full h-screen text-center justify-center content-center items-center flex flex-col'>
         <div className='dark:text-gray-200'>
           <h2 className='inline-block border-r-2 border-gray-600 mr-2 px-3 py-2 align-top'>
-            <i className='mr-2 fas fa-spinner animate-spin' />
+            <i className='mr-2 fas fa-exclamation-triangle' />
             404
           </h2>
           <div className='inline-block text-left h-32 leading-10 items-center'>
-            <h2 className='m-0 p-0'>{locale.NAV.PAGE_NOT_FOUND_REDIRECT}</h2>
+            <h2 className='m-0 p-0'>{locale.NAV.PAGE_NOT_FOUND || '404 Not Found'}</h2>
+            <p className='mt-2 text-sm text-gray-500'>Vui lòng chọn một bài viết từ menu bên trái.</p>
           </div>
         </div>
       </div>
