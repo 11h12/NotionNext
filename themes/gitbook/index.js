@@ -439,9 +439,9 @@ const Layout404 = props => {
     setTimeout(() => {
       const article = isBrowser && document.getElementById('article-wrapper')
       if (!article) {
-        router.push('/').then(() => {
-          // console.log('找不到页面', router.asPath)
-        })
+        if (router.asPath !== '/') {
+          router.push('/').then(() => {})
+        }
       }
     }, 3000)
   }, [])
