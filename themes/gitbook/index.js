@@ -255,8 +255,18 @@ const LayoutIndex = props => {
         // 仅当未重定向时执行
         setHasRedirected(true) // 更新状态，防止多次执行
 
-        // 重定向到指定文章
-        await router.push(index)
+        // Check if the target exists in allNavPages
+        const targetUrl = index.startsWith('/') ? index : '/' + index;
+        const exists = props.allNavPages && props.allNavPages.some(p => p.slug === index || p.href === targetUrl || p.id === index);
+        
+        if (exists || index === 'about') {
+            await router.push(targetUrl)
+        } else if (props.allNavPages && props.allNavPages.length > 0) {
+            // Fallback to the first available page if the configured index doesn't exist
+            await router.push(props.allNavPages[0].href)
+        } else {
+            // Nothing to show
+        }
 
         // 使用setTimeout检查页面加载情况
         setTimeout(() => {
