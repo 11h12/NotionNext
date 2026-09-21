@@ -51,10 +51,10 @@ function PaletteField ({ item, value, copyValue, isHexColor, updateItem, resetIt
             </span>
             <button
               type='button'
-              onClick={() => void copyText(item.key, '配置名已复制到剪贴板')}
+              onClick={() => void copyText(item.key, 'Đã sao chép tên cấu hình')}
               className='flex h-5 w-5 shrink-0 items-center justify-center rounded text-gray-400 transition hover:bg-gray-100 hover:text-indigo-600 dark:hover:bg-gray-800 dark:hover:text-indigo-300'
-              title='复制配置名'
-              aria-label={`复制配置名 ${item.key}`}>
+              title='Sao chép tên cấu hình'
+              aria-label={`Sao chép tên cấu hình ${item.key}`}>
               <i className='fa-regular fa-copy text-[10px]' aria-hidden />
             </button>
           </div>
@@ -75,10 +75,10 @@ function PaletteField ({ item, value, copyValue, isHexColor, updateItem, resetIt
         />
         <button
           type='button'
-          onClick={() => void copyText(copyValue, '配置值已复制到剪贴板')}
+          onClick={() => void copyText(copyValue, 'Đã sao chép giá trị cấu形')}
           className='flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-gray-200 text-gray-400 transition hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-600 dark:border-gray-700 dark:hover:border-indigo-600 dark:hover:bg-indigo-950/40 dark:hover:text-indigo-300'
-          title='复制配置值'
-          aria-label={`复制配置值 ${item.key}`}>
+          title='Sao chép giá trị'
+          aria-label={`Sao chép giá trị ${item.key}`}>
           <i className='fa-regular fa-copy text-xs' aria-hidden />
         </button>
       </div>
@@ -218,12 +218,12 @@ function ThemeConsole ({ meta, isOpen, onClose }) {
 
   const resetAllSettings = () => {
     settings.forEach(resetSetting)
-    showNotice('信息配置已恢复默认')
+    showNotice('Đã khôi phục cấu hình mặc định')
   }
 
   const resetAllPalette = () => {
     palette.forEach(resetItem)
-    showNotice('配色已恢复默认')
+    showNotice('Đã khôi phục bảng màu mặc định')
   }
 
   const toggleSection = key => {
@@ -236,13 +236,13 @@ function ThemeConsole ({ meta, isOpen, onClose }) {
     noticeTimerRef.current = window.setTimeout(() => setNotice(''), 1800)
   }
 
-  const copyText = async (text, message = '配置已复制到剪贴板') => {
+  const copyText = async (text, message = 'Đã sao chép cấu hình') => {
     try {
       if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable')
       await navigator.clipboard.writeText(String(text))
       showNotice(message)
     } catch {
-      showNotice('复制失败，请检查浏览器剪贴板权限')
+      showNotice('Sao chép thất bại, vui lòng kiểm tra quyền truy cập khay nhớ tạm')
     }
   }
 
@@ -257,7 +257,7 @@ function ThemeConsole ({ meta, isOpen, onClose }) {
         return `${item.key}: ${formatConfigValue(value)}`
       })
     const text = settingText.concat(paletteText).join(',\n')
-    copyText(text, '全部配置已复制到剪贴板')
+    copyText(text, 'Đã sao chép toàn bộ cấu hình')
   }
 
   const parseConfigText = text => {
@@ -287,7 +287,7 @@ function ThemeConsole ({ meta, isOpen, onClose }) {
     try {
       const text = await navigator.clipboard?.readText()
       if (!text) {
-        showNotice('剪贴板为空，请先复制 Notion Config 配置片段')
+        showNotice('Khay nhớ tạm trống, vui lòng sao chép cấu hình từ Notion Config')
         return
       }
       const data = parseConfigText(text)
@@ -304,9 +304,9 @@ function ThemeConsole ({ meta, isOpen, onClose }) {
           count++
         }
       })
-      showNotice(count ? `已从剪贴板导入 ${count} 项配置` : '未识别到当前主题可用配置')
+      showNotice(count ? `Đã nhập từ khay nhớ tạm ${count} mục cấu hình` : 'Không nhận diện được cấu hình cho giao diện hiện tại')
     } catch {
-      showNotice('无法读取剪贴板，请检查浏览器剪贴板权限')
+      showNotice('Không thể đọc khay nhớ tạm, vui lòng kiểm tra quyền truy cập')
     }
   }
 
@@ -315,7 +315,7 @@ function ThemeConsole ({ meta, isOpen, onClose }) {
       <section
         style={{ right: '1rem', top: '10vh' }}
         role='dialog'
-        aria-label={`主题控制台 · ${meta.name}`}
+        aria-label={`Bảng điều khiển · ${meta.name}`}
         aria-hidden={!isOpen}
         className={`fixed z-50 w-[min(94vw,40rem)] overflow-hidden rounded-2xl border border-gray-200/80 bg-white/95 shadow-2xl ring-1 ring-black/5 backdrop-blur-xl transition-[transform,opacity] duration-200 ease-out will-change-transform motion-reduce:transform-none motion-reduce:transition-none dark:border-gray-700/70 dark:bg-gray-950/95 dark:ring-white/10 sm:w-[min(92vw,42rem)] ${
           isOpen
@@ -325,10 +325,10 @@ function ThemeConsole ({ meta, isOpen, onClose }) {
         <div className='flex items-start justify-between gap-3 border-b border-gray-100 px-4 py-3 dark:border-gray-800'>
           <div className='min-w-0'>
             <p className='text-sm font-semibold text-gray-900 dark:text-white'>
-              主题控制台 · {meta.name}
+              Bảng điều khiển · {meta.name}
             </p>
             <p className='mt-0.5 text-xs text-gray-500 dark:text-gray-400'>
-              实时预览当前主题配置，复制后写入 Notion Config。
+              Xem trước trực tiếp cài đặt, sao chép và dán vào Notion Config để lưu vĩnh viễn.
             </p>
           </div>
           <div className='flex shrink-0 items-center gap-1 rounded-xl border border-gray-200 bg-gray-50 p-1 shadow-sm dark:border-gray-700 dark:bg-gray-900'>
@@ -336,14 +336,14 @@ function ThemeConsole ({ meta, isOpen, onClose }) {
               type='button'
               onClick={copyAll}
               className='flex h-9 w-9 items-center justify-center rounded-lg border border-transparent text-gray-600 transition hover:border-indigo-200 hover:bg-white hover:text-indigo-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 dark:text-gray-300 dark:hover:border-indigo-700 dark:hover:bg-gray-800 dark:hover:text-indigo-300'
-              title='导出全部配置'>
+              title='Xuất toàn bộ cấu hình'>
               <i className='fa-solid fa-file-export text-sm' aria-hidden />
             </button>
             <button
               type='button'
               onClick={() => void importConfigFromClipboard()}
               className='flex h-9 w-9 items-center justify-center rounded-lg border border-transparent text-gray-600 transition hover:border-indigo-200 hover:bg-white hover:text-indigo-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 dark:text-gray-300 dark:hover:border-indigo-700 dark:hover:bg-gray-800 dark:hover:text-indigo-300'
-              title='导入配置'>
+              title='Nhập cấu hình'>
               <i className='fa-solid fa-file-import text-sm' aria-hidden />
             </button>
             <button
@@ -369,10 +369,10 @@ function ThemeConsole ({ meta, isOpen, onClose }) {
                 className='group flex min-w-0 flex-1 items-center justify-between gap-3 rounded-xl px-3 py-3 text-left transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-indigo-500 dark:hover:bg-gray-800 sm:pl-4'>
                 <span>
                   <span className='block text-sm font-semibold text-gray-900 dark:text-white'>
-                    信息配置
+                    Cấu hình chung
                   </span>
                   <span className='mt-0.5 block text-xs text-gray-500 dark:text-gray-400'>
-                    当前主题安全白名单配置
+                    Các cài đặt khả dụng cho giao diện hiện tại
                   </span>
                 </span>
                 <span className='flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-500 shadow-sm transition group-hover:border-indigo-300 group-hover:text-indigo-600 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-300 dark:group-hover:border-indigo-600 dark:group-hover:text-indigo-300'>
@@ -386,8 +386,8 @@ function ThemeConsole ({ meta, isOpen, onClose }) {
                 type='button'
                 onClick={resetAllSettings}
                 className='mr-3 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-500 shadow-sm transition hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-300 dark:hover:border-amber-700 dark:hover:bg-amber-950/50 dark:hover:text-amber-300'
-                title='恢复默认信息配置'
-                aria-label='恢复默认信息配置'>
+                title='Khôi phục cấu hình chung'
+                aria-label='Khôi phục cấu hình chung'>
                 <i className='fa-solid fa-rotate-left text-xs' aria-hidden />
               </button>
             </div>
@@ -410,10 +410,10 @@ function ThemeConsole ({ meta, isOpen, onClose }) {
                             </span>
                             <button
                               type='button'
-                              onClick={() => void copyText(item.key, '配置名已复制到剪贴板')}
+                              onClick={() => void copyText(item.key, 'Đã sao chép tên cấu hình')}
                               className='flex h-5 w-5 shrink-0 items-center justify-center rounded text-gray-400 transition hover:bg-gray-100 hover:text-indigo-600 dark:hover:bg-gray-800 dark:hover:text-indigo-300'
-                              title='复制配置名'
-                              aria-label={`复制配置名 ${item.key}`}>
+                              title='Sao chép tên cấu hình'
+                              aria-label={`Sao chép tên cấu hình ${item.key}`}>
                               <i className='fa-regular fa-copy text-[10px]' aria-hidden />
                             </button>
                           </div>
@@ -463,10 +463,10 @@ function ThemeConsole ({ meta, isOpen, onClose }) {
                       )}
                         <button
                           type='button'
-                          onClick={() => void copyText(value, '配置值已复制到剪贴板')}
+                          onClick={() => void copyText(value, 'Đã sao chép giá trị cấu形')}
                           className='flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-gray-200 text-gray-400 transition hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-600 dark:border-gray-700 dark:hover:border-indigo-600 dark:hover:bg-indigo-950/40 dark:hover:text-indigo-300'
-                          title='复制配置值'
-                          aria-label={`复制配置值 ${item.key}`}>
+                          title='Sao chép giá trị'
+                          aria-label={`Sao chép giá trị ${item.key}`}>
                           <i className='fa-regular fa-copy text-xs' aria-hidden />
                         </button>
                       </div>
@@ -474,7 +474,7 @@ function ThemeConsole ({ meta, isOpen, onClose }) {
                   )
                 }) : (
                   <p className='rounded-xl border border-dashed border-gray-200 p-3 text-xs text-gray-500 dark:border-gray-700 dark:text-gray-400 sm:col-span-2'>
-                    当前主题暂未声明可在线调整的信息配置。
+                    Giao diện này chưa hỗ trợ cấu hình trực tiếp.
                   </p>
                 )}
               </div>
@@ -490,10 +490,10 @@ function ThemeConsole ({ meta, isOpen, onClose }) {
                 className='group flex min-w-0 flex-1 items-center justify-between gap-3 rounded-xl px-3 py-3 text-left transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-indigo-500 dark:hover:bg-gray-800 sm:pl-4'>
                 <span>
                   <span className='block text-sm font-semibold text-gray-900 dark:text-white'>
-                    配色
+                    Bảng màu
                   </span>
                   <span className='mt-0.5 block text-xs text-gray-500 dark:text-gray-400'>
-                    色值实时写入当前主题 CSS 变量
+                    Màu sắc được áp dụng ngay lập tức
                   </span>
                 </span>
                 <span className='flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-500 shadow-sm transition group-hover:border-indigo-300 group-hover:text-indigo-600 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-300 dark:group-hover:border-indigo-600 dark:group-hover:text-indigo-300'>
@@ -507,15 +507,15 @@ function ThemeConsole ({ meta, isOpen, onClose }) {
                 type='button'
                 onClick={resetAllPalette}
                 className='mr-3 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-500 shadow-sm transition hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-300 dark:hover:border-amber-700 dark:hover:bg-amber-950/50 dark:hover:text-amber-300'
-                title='恢复默认配色'
-                aria-label='恢复默认配色'>
+                title='Khôi phục bảng màu'
+                aria-label='Khôi phục bảng màu'>
                 <i className='fa-solid fa-rotate-left text-xs' aria-hidden />
               </button>
             </div>
             {openSections.palette && (
               <div className='grid grid-cols-2 gap-2 border-t border-gray-100 p-3 dark:border-gray-800'>
                 <div className='col-span-2 flex items-center gap-3 text-xs font-semibold text-gray-500 dark:text-gray-400'>
-                  <span>浅色模式</span>
+                  <span>Chế độ sáng</span>
                   <span className='h-px flex-1 bg-gray-200 dark:bg-gray-700' />
                 </div>
                 {lightPalette.map(item => (
@@ -531,7 +531,7 @@ function ThemeConsole ({ meta, isOpen, onClose }) {
                   />
                 ))}
                 <div className='col-span-2 mt-2 flex items-center gap-3 border-t border-gray-200 pt-3 text-xs font-semibold text-gray-500 dark:border-gray-700 dark:text-gray-400'>
-                  <span>深色模式</span>
+                  <span>Chế độ tối</span>
                   <span className='h-px flex-1 bg-gray-200 dark:bg-gray-700' />
                 </div>
                 {darkPalette.map(item => (
@@ -549,7 +549,7 @@ function ThemeConsole ({ meta, isOpen, onClose }) {
                 {!darkPalette.length ? (
                   <div className='col-span-2 space-y-2'>
                     <p className='rounded-xl border border-dashed border-gray-200 p-3 text-xs text-gray-500 dark:border-gray-700 dark:text-gray-400'>
-                      当前主题暂未声明深色模式色号。
+                      Giao diện này chưa hỗ trợ mã màu cho Chế độ tối.
                     </p>
                   </div>
                 ) : null}
@@ -629,7 +629,7 @@ const ThemeSwitch = () => {
                   ? 'text-gray-500 hover:bg-gray-800 hover:text-gray-300'
                   : 'text-gray-400 hover:bg-gray-100 hover:text-gray-600'
               }`}
-              title='拖拽移动'>
+              title='Kéo để di chuyển'>
               <i className='fa-solid fa-grip-vertical text-xs' aria-hidden />
             </span>
             <button
@@ -643,8 +643,8 @@ const ThemeSwitch = () => {
               onClick={() => {
                 setSideBarVisible(true)
               }}
-              title='切换主题'
-              aria-label={`切换主题，当前为 ${currentMeta.name}`}>
+              title='Đổi giao diện'
+              aria-label={`Đổi giao diện, hiện tại là ${currentMeta.name}`}>
               <span
                 className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md ${
                   isDarkMode
@@ -671,8 +671,8 @@ const ThemeSwitch = () => {
                   setConsoleMounted(true)
                 }
               }}
-              title='配置主题'
-              aria-label='配置主题'
+              title='Cấu hình giao diện'
+              aria-label='Cấu hình giao diện'
               aria-expanded={consoleVisible}>
               <i className='fa-solid fa-sliders translate-y-[-1px] text-sm leading-none' aria-hidden />
             </button>
@@ -684,8 +684,8 @@ const ThemeSwitch = () => {
                   ? 'text-amber-300 hover:bg-gray-800'
                   : 'text-gray-500 hover:bg-gray-100 hover:text-gray-900'
               }`}
-              title={isDarkMode ? '切换浅色模式' : '切换深色模式'}
-              aria-label={isDarkMode ? '切换浅色模式' : '切换深色模式'}>
+              title={isDarkMode ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối'}
+              aria-label={isDarkMode ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối'}>
               <span className='h-4 w-4 [&_svg]:h-4 [&_svg]:w-4'>
                 {isDarkMode ? <Sun /> : <Moon />}
               </span>
@@ -737,7 +737,7 @@ const ThemeSwitch = () => {
 
             <div>
               <p className='text-sm font-medium text-gray-900 dark:text-gray-100'>
-                点击下方主题进行切换.
+                Bấm vào một giao diện bên dưới để thay đổi.
               </p>
               <p className='mt-1 text-xs text-gray-500 dark:text-gray-400'>
                 Click below to switch the theme.
