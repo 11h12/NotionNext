@@ -8,7 +8,7 @@ module.exports = {
   // 后面空格隔开的font-light的字体粗细，留空是默认粗细；参考 https://www.tailwindcss.cn/docs/font-weight
   FONT_STYLE: process.env.NEXT_PUBLIC_FONT_STYLE || 'font-sans font-light',
   // 字体CSS 例如 https://npm.elemecdn.com/lxgw-wenkai-webfont@1.6.0/style.css
-  FONT_URL: process.env.NEXT_PUBLIC_FONT_URL || '',
+  FONT_URL: process.env.NEXT_PUBLIC_FONT_URL || 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap',
 
   // 字体优化配置
   FONT_DISPLAY: process.env.NEXT_PUBLIC_FONT_DISPLAY || 'swap',
@@ -16,6 +16,7 @@ module.exports = {
   FONT_SUBSET: process.env.NEXT_PUBLIC_FONT_SUBSET || 'chinese-simplified',
   // 无衬线字体 例如'"LXGW WenKai"'
   FONT_SANS: [
+    '"Inter"',
     // '"LXGW WenKai"',
     '"PingFang SC"',
     '-apple-system',
@@ -36,6 +37,7 @@ module.exports = {
   ],
   // 衬线字体 例如'"LXGW WenKai"'
   FONT_SERIF: [
+    '"Lora"',
     // '"LXGW WenKai"',
     'Bitter',
     '"Noto Serif SC"',
