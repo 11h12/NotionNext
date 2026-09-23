@@ -1,15 +1,12 @@
-import { useRouter } from 'next/router'
+import { useGlobal } from '@/lib/global'
+import { useEffect, useState } from 'react'
 
 export default function LanguageSwitch() {
-  const router = useRouter()
-  // Check the current locale from Next.js router
-  const currentLocale = router.locale
-  const isEn = currentLocale === 'en'
+  const { lang, changeLang } = useGlobal()
+  const isEn = lang === 'en-US'
 
   const toggleLanguage = () => {
-    const newLocale = isEn ? 'vi-VN' : 'en'
-    // Preserve the current path, just switch the locale
-    router.push(router.pathname, router.asPath, { locale: newLocale })
+    changeLang(isEn ? 'vi-VN' : 'en-US')
   }
 
   return (
