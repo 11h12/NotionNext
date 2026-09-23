@@ -9,6 +9,7 @@ import LogoBar from './LogoBar'
 import { MenuBarMobile } from './MenuBarMobile'
 import { MenuItemDrop } from './MenuItemDrop'
 import SearchInput from './SearchInput'
+import LanguageSwitch from './LanguageSwitch'
 
 /**
  * 页头：顶部导航栏 + 菜单
@@ -95,6 +96,7 @@ export default function Header(props) {
                 <UserButton />
               </>
             )}
+            <LanguageSwitch />
             <DarkModeButton className='text-sm items-center h-full hidden md:flex' />
             <SearchInput className='hidden md:flex md:w-52 lg:w-72' />
             {/* 折叠按钮、仅移动端显示 */}

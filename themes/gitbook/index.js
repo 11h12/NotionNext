@@ -276,7 +276,7 @@ const LayoutIndex = props => {
             const containerInner = document.querySelector(
               '#theme-gitbook #container-inner'
             )
-            const newHTML = `<h1 class="text-3xl pt-12 dark:text-gray-300">配置有误</h1><blockquote class="notion-quote notion-block-ce76391f3f2842d386468ff1eb705b92"><div>请在您的notion中添加一个slug为${index}的文章</div></blockquote>`
+            const newHTML = `<h1 class="text-3xl pt-12 dark:text-gray-300">Lỗi cấu hình</h1><blockquote class="notion-quote notion-block-ce76391f3f2842d386468ff1eb705b92"><div>Vui lòng thêm một bài viết có slug là ${index} trong Notion của bạn</div></blockquote>`
             containerInner?.insertAdjacentHTML('afterbegin', newHTML)
           }
         }, 2000)
